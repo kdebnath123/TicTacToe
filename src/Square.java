@@ -58,4 +58,10 @@ public class Square {
     public String toString() {
         return this.marker;
     }
+
+    // TODO: draw square
+    public void draw(){
+
+    }
+
 }
