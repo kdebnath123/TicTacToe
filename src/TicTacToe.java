@@ -59,7 +59,7 @@ public class TicTacToe
         this.winIndex = -1;
         this.winDirection = -1;
 
-        // Window stuff
+        // Window
         this.window = new TicTacToeViewer(board);
     }
 
