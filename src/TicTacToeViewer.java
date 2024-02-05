@@ -8,16 +8,15 @@ public class TicTacToeViewer extends JFrame {
                             X_OFFSET = (WIDTH - BOX_SIZE*3) / 2,
                             Y_OFFSET = (HEIGHT - BOX_SIZE*3) / 2;
 
-    public Image Ximage;
-    public Image Oimage;
-
     public static final String TITLE  = "TIC-TAC-TOE";
 
+    private TicTacToe t;
     private Square[][] board;
 
-    public TicTacToeViewer(Square[][] board){
+    public TicTacToeViewer(TicTacToe t){
 
-        this.board = board;
+        this.t = t;
+        this.board = t.getBoard();
 
         this.setSize(WIDTH, HEIGHT);
         this.setTitle(TITLE);
@@ -32,37 +31,54 @@ public class TicTacToeViewer extends JFrame {
         g.fillRect(0,0, WIDTH, HEIGHT);
 
         // Draw grid
-        g.setColor(Color.GREEN);
+        g.setColor(Color.white);
         g.drawRect(X_OFFSET, Y_OFFSET, BOX_SIZE*3, BOX_SIZE*3);
-
-
 
 
         //Draw axes
         drawAxes(g);
 
 
-        //Draw Sqaures
+        //Draw Squares
         for (int i = 0; i < 3; i++){
             for (int j = 0; j < 3; j++){
-                //Gives information for each loction to draw square
-                // TODO: move equations into sqaure b/c pbulic
-                // TODO: pass int window with this so sqaure knows where to draw itslef
-                board[i][j].draw(X_OFFSET + (BOX_SIZE* j), Y_OFFSET + (BOX_SIZE*i), BOX_SIZE, g, this);
+                //Draw each square
+                board[i][j].draw(g, this);
             }
         }
+
+
+        if (t.getGameOver() ){
+            drawWinner(g, t.getWinner());
+
+        }
+
 
 
     }
     public void drawAxes(Graphics g){
         // Draw horizontal axis
+        g.setColor(Color.white);
+
         for (int i = 0; i < 3; i++){
             g.drawString(String.valueOf(i), X_OFFSET + (BOX_SIZE* i) + BOX_SIZE / 2, Y_OFFSET - 10);
         }
 
-        // Draw verticle axis
+        // Draw vert axis
         for (int i = 0; i < 3; i++){
             g.drawString(String.valueOf(i), X_OFFSET - 20, Y_OFFSET + (BOX_SIZE* i) + BOX_SIZE / 2);
         }
     }
+
+    public void drawWinner(Graphics g, String winner){
+
+        g.setColor(Color.white);
+        if(winner.equals(TicTacToe.BLANK)) {
+            g.drawString("TIE GAME", X_OFFSET, 550);
+        }
+        else{
+            g.drawString(winner + " WINS", X_OFFSET, 550);
+        }
+    }
+
 }

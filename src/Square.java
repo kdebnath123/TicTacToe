@@ -69,11 +69,17 @@ public class Square {
     }
 
 
-    public void draw(int x, int y, int size, Graphics g, ){
-        g.drawRect(x,y,size, size);
+    public void draw(Graphics g, TicTacToeViewer t){
+
+        int x_corner = TicTacToeViewer.X_OFFSET + (TicTacToeViewer.BOX_SIZE* col);
+        int y_corner = TicTacToeViewer.Y_OFFSET + (TicTacToeViewer.BOX_SIZE*row);
+        int size = TicTacToeViewer.BOX_SIZE;
+
+        g.drawRect(x_corner, y_corner, size, size);
 
         if(isWinningSquare){
-            g.fillRect(x,y,size,size);
+            g.setColor(Color.green);
+            g.fillRect(x_corner,y_corner,size,size);
         }
 
         switch (marker){
@@ -81,17 +87,12 @@ public class Square {
                 break;
 
             case "X":
-
-                g.drawImage(Ximage, x,y, );
+                g.drawImage(Ximage, x_corner, y_corner, size, size, t);
                 break;
             case "O":
-                g.drawImage(Oimage,x,y, );
+                g.drawImage(Oimage,x_corner, y_corner, size, size, t);
+                break;
         }
-
-
-
-
-
     }
 
 }

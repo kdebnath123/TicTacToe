@@ -10,6 +10,7 @@
  * @version: Jan 2023
  */
 
+import java.awt.*;
 import java.util.Scanner;
 
 public class TicTacToe
@@ -35,6 +36,7 @@ public class TicTacToe
     private Square[][] board;
     private boolean isGameOver;
 
+    // connects with front end
     private TicTacToeViewer window;
 
     /**
@@ -60,7 +62,7 @@ public class TicTacToe
         this.winDirection = -1;
 
         // Window
-        this.window = new TicTacToeViewer(board);
+        this.window = new TicTacToeViewer(this);
     }
 
     /******************** Methods You May Find Helpful ********************/
@@ -124,6 +126,8 @@ public class TicTacToe
             } else {
                 System.out.println("That space is taken, or you entered an invalid row/col");
             }
+
+            window.repaint();
         }
 
         this.printBoard();
@@ -142,6 +146,9 @@ public class TicTacToe
                 System.out.println("X Wins!");
             }
         }
+
+       window.repaint();
+
     }
 
 
